@@ -1,0 +1,80 @@
+<script>
+//查看滚动条滚动的距离
+function getScrollOffset(){
+    if(window.pageXOffset){
+        return{
+            x:window.pageXOffset,
+            y:window.pageYOffset
+        }
+    }else{
+        return{
+            x:document.body.scrollLeft+docuemnt.docmentElement.scrollLeft,
+            y:document.body.scrollTop+docuemnt.docmentElement.scrollTop,
+        }
+    }
+}
+//查看视口的尺寸
+function getViewportOffset(){
+    if(window.innerWidth){
+        return{
+            w:window.innerWidth,
+            h:windw.innerHeight
+        }
+    }else{
+        if(docuemnt.compatMode=="BackCompat"){
+            return{
+               w:document.body.clientWidth,
+               h:document.body.clientHeight
+            }
+        }
+    
+    }else{
+        return{
+            w:document.docuemntElement.clientWidth,
+            h:document.docuemntElement.clientHeight
+        }
+    }
+}
+//判断是否是数组
+function isArray(arr){
+    return Object.prototype.toString.call(arr)=='[object Array]';
+}
+//封装兼容性的addEvent(elem,type,haddle);
+function addEvent(elem,type,haddle){
+    if(elem.addEventListener){
+        elem.addEventListener(type,haddle,false);
+    }else if(elem.attachEvent){
+        elem.attachEvent('on'+type,funvtion (){
+            handle.call(elem);
+        })
+    }else{
+        elem['on'+type]=haddle;
+    }
+}
+//封装取消冒泡
+function stopBubble(event){
+    if(event.stopPropagation){
+        event.stopPropagation();
+        }else{
+            event.cancelBublle=true;
+        }        
+        }
+//封装阻止默认事件的函数:cancelHanddler(event)
+ function cancelHanddler(event){
+     if(event.preventDefault){
+        event.preventDefault();
+     }else{
+        event.returnValue=false; 
+     }
+ }
+ //封装样式
+ function getStyle(elem,prop){
+  if(window.getComputedStyle){
+      return window.getComputedStyle(elem,null)[prop];
+  }esle{
+      return elem.currentStyle[prop];
+  }
+
+ }
+
+</script>
